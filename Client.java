@@ -27,7 +27,7 @@ public class Client {
     public static String ipToString(byte[] ip, String separator){
         String[] hex = new String[ip.length];
         for (int i = 0; i < ip.length; i++) {
-            hex[i] = String.format("%02X", ip[i]);
+            hex[i] = String.format("%16f", ip[i]);
         }
         return String.join(separator, hex);
     }
@@ -36,7 +36,7 @@ public class Client {
         try {
             System.out.println("--------Client--------\n");
             DHCPMessage dhcpMessage = new DHCPMessage();
-            InetAddress IPAddress = InetAddress.getByName("192.168.20.199"); /* UDP subnet broadcast address */
+            InetAddress IPAddress = InetAddress.getByName("localhost"); /* UDP subnet broadcast address */
             int sPort = dhcpMessage.SERVER_PORT; /* UDP server port number */
             int cPort = dhcpMessage.CLIENT_PORT; /* UDP server port number */		
             byte[] sendData = new byte[1024];
@@ -122,7 +122,7 @@ public class Client {
             dhcpMessage = (DHCPMessage)ois.readObject();
             System.out.println("--[DHCP Pack] Received from Server\n");
             // CHANGE IP
-            String yIP = ipToString(dhcpMessage.getYiaddr(), "");
+            String yIP = new String(dhcpMessage.getYiaddr());
             System.out.println("IP: "+yIP);
             // runCmd(yIP);
             dhcpSocket.close();
