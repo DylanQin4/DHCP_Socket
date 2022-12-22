@@ -10,7 +10,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 import java.util.Random;
-
 import org.xml.sax.ext.DeclHandler;
 
 public class DHCPMessage implements Serializable {
@@ -191,7 +190,7 @@ public class DHCPMessage implements Serializable {
 		dhcpMessage.setSecs((byte)0);
 		dhcpMessage.setHops((byte)1);
         return dhcpMessage;
-	}
+	}	
 	public DHCPMessage DHCPDECLINE(){
 		DHCPMessage dhcpMessage = new DHCPMessage();
         dhcpMessage.setHtype(DHCPDECLINE);

@@ -26,7 +26,7 @@ public class DHCPSocket extends DatagramSocket {
 	public DHCPSocket(int inPort) throws SocketException {
 		super(inPort);
 		setSoTimeout(this.SOCKET_TIMEOUT);
-	}
+	}	
 
 	/**
 	 * Constructor for creating DHCPSocket on a specific local address and port

@@ -39,7 +39,7 @@ public class Client {
         try {
             System.out.println("--------Client--------\n");
             DHCPMessage dhcpMessage = new DHCPMessage();
-            InetAddress IPAddress = InetAddress.getByName("192.168.88.12"); /* UDP subnet broadcast address */
+            InetAddress IPAddress = InetAddress.getByName("localhost"); /* UDP subnet broadcast address */
             int sPort = dhcpMessage.SERVER_PORT; /* UDP server port number */
             int cPort = dhcpMessage.CLIENT_PORT; /* UDP server port number */		
             byte[] sendData = new byte[1024];

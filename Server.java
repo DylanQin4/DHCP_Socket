@@ -105,7 +105,7 @@ public class Server {
     public static void main(String[] args) {
         try {
             DHCPMessage dhcpMessage = new DHCPMessage();
-            InetAddress IPAddress = InetAddress.getByName("192.168.88.12");
+            InetAddress IPAddress = InetAddress.getByName("localhost");
             int sPort = dhcpMessage.SERVER_PORT;
             int cPort = dhcpMessage.CLIENT_PORT;		
             byte[] sendData = new byte[1024];
