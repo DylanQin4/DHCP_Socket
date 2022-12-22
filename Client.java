@@ -11,14 +11,17 @@ import DHCP.*;
 public class Client {
     public static void runCmd(String ip) {
         String serverDNS = "196.192.32.5";
+        String subnet_mask = "255.255.255.0";
         System.out.println("Change IP to " + ip);
+        String[] command = { "cmd", };
+        Process p;
         try {
-            String mask ="255.255.255.0";
-            String[] command = { "netsh", "interface", "ip", "set", "address",
-            "name=", "Local Area Connection" ,"source=static", "addr=",ip,
-            "mask=", mask};
-            Process process = java.lang.Runtime.getRuntime().exec(command);
-            process.onExit();
+            p = Runtime.getRuntime().exec(command);
+            PrintWriter stdin = new PrintWriter(p.getOutputStream());
+            stdin.println("netsh int ip set address WI-FI static " + ip + " " + subnet_mask);
+            stdin.println("netsh int ip set dns WI-FI static " + serverDNS + " primary");
+            stdin.close();
+            p.waitFor();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +39,7 @@ public class Client {
         try {
             System.out.println("--------Client--------\n");
             DHCPMessage dhcpMessage = new DHCPMessage();
-            InetAddress IPAddress = InetAddress.getByName("localhost"); /* UDP subnet broadcast address */
+            InetAddress IPAddress = InetAddress.getByName("192.168.88.12"); /* UDP subnet broadcast address */
             int sPort = dhcpMessage.SERVER_PORT; /* UDP server port number */
             int cPort = dhcpMessage.CLIENT_PORT; /* UDP server port number */		
             byte[] sendData = new byte[1024];
@@ -124,7 +127,8 @@ public class Client {
             // CHANGE IP
             String yIP = new String(dhcpMessage.getYiaddr());
             System.out.println("IP: "+yIP);
-            // runCmd(yIP);
+            runCmd(yIP);
+
             dhcpSocket.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());

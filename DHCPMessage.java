@@ -150,7 +150,7 @@ public class DHCPMessage implements Serializable {
 		dhcpMessage.setFlags((short)0x8000);
 		return dhcpMessage;
 	}
-	public DHCPMessage DHCPOFFER(int xID, byte[] gateway, byte[] mac, byte[] sIP, byte[] cIP){
+	public DHCPMessage DHCPOFFER(int xID, byte[] gateway, byte[] mac, byte[] yIP, byte[] sIP, byte[] cIP){
         DHCPMessage dhcpMessage = new DHCPMessage();
         dhcpMessage.setHtype(DHCPOFFER);
 		dhcpMessage.setOp(OP_REPLY);
@@ -159,6 +159,7 @@ public class DHCPMessage implements Serializable {
 		dhcpMessage.setChaddr(mac);
 		dhcpMessage.setHlen((byte)6);
 		dhcpMessage.setSecs((byte)0);
+		dhcpMessage.setYiaddr(yIP);
 		dhcpMessage.setSiaddr(sIP);
 		dhcpMessage.setCiaddr(cIP);
 		dhcpMessage.setHops((byte)1);

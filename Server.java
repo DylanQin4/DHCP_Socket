@@ -105,7 +105,7 @@ public class Server {
     public static void main(String[] args) {
         try {
             DHCPMessage dhcpMessage = new DHCPMessage();
-            InetAddress IPAddress = InetAddress.getByName("localhost");
+            InetAddress IPAddress = InetAddress.getByName("192.168.88.12");
             int sPort = dhcpMessage.SERVER_PORT;
             int cPort = dhcpMessage.CLIENT_PORT;		
             byte[] sendData = new byte[1024];
@@ -154,6 +154,7 @@ public class Server {
                 DHCPMessage DHCPOFFER = dhcpMessage.DHCPOFFER(dhcpMessage.getXid(), 
                                                                 dhcpMessage.getGiaddr(), 
                                                                 dhcpMessage.getChaddr(), 
+                                                                yIP.getBytes(),
                                                                 dhcpMessage.getSiaddr(), 
                                                                 dhcpMessage.getCiaddr());
                 oos.writeObject(DHCPOFFER);
@@ -191,7 +192,7 @@ public class Server {
                 System.out.println("--[DHCP Request] Received from Client");
 
                 // --------SEND DHCPACK---------
-                DHCPMessage DHCPACK = dhcpMessage.DHCPACK(  dhcpMessage.getXid(), 
+                DHCPMessage DHCPACK = dhcpMessage.DHCPACK(dhcpMessage.getXid(), 
                                                             yIP.getBytes(), 
                                                             InetAddress.getByName(yIP),
                                                             dhcpMessage.getSiaddr(), 
